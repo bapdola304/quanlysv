@@ -18,7 +18,7 @@ $querysv = mysqli_query($connect, $sqlsv);
   </div>
   <h3> Lớp:  <?= $lop ?></h3>
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<?= $lop?>">Xem Môn Học Của Lớp <?= $lop?></button> <br/>
-  <button style=" margin-top: 10px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModaltkb<?= $lop?>">Xem Thời Khóa Biểu Của Lớp <?= $lop?></button>
+  <button style=" margin-top: 10px;" type="button" class="btn btn-success" id="tkb1" data-toggle="modal" data-target="#myModaltkb<?= $lop?>">Xem Thời Khóa Biểu Của Lớp <?= $lop?></button>
   <!-- Modal -->
   <div class="modal fade" id="myModal<?= $lop?>" role="dialog">
     <div class="modal-dialog">
@@ -116,6 +116,14 @@ $querysv = mysqli_query($connect, $sqlsv);
 <script type="text/javascript">
   $(document).ready(()=>{
       $("#hocky").change(()=>{
+        let hk = $("#hocky").val();
+        let lop = $("#lop").val();
+        $.get("thoikb.php",{hocky : hk, lop : lop},(data)=>{
+            $("#tkb").html(data);
+        });
+      })
+
+         $("#tkb1").click(()=>{
         let hk = $("#hocky").val();
         let lop = $("#lop").val();
         $.get("thoikb.php",{hocky : hk, lop : lop},(data)=>{
